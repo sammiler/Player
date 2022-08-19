@@ -56,11 +56,16 @@ public class ConnectActivity extends BaseActivity {
     private ServerAddressView serverAddressView;
 
     @DisconnectionReasons private int mDisconnectionReason = MANUAL_DISCONNECT;
+    // Used to load the 'myapplication' library on application startup.
+    static {
+        System.loadLibrary("Player");
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        String a = stringFromJNI();
+        System.out.println(a);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             //noinspection ResourceType
@@ -126,7 +131,11 @@ public class ConnectActivity extends BaseActivity {
                 break;
         }
     }
-
+    /**
+     * A native method that is implemented by the 'myapplication' native library,
+     * which is packaged with this application.
+     */
+    public native String stringFromJNI();
     /**
      * Show this activity.
      * @see #show(android.app.Activity)

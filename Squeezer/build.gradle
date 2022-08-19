@@ -78,6 +78,15 @@ android {
 
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
+        ndk {
+            moduleName "native-lib"         //生成的so名字
+            abiFilters  "armeabi-v7a", "x86"  //输出指定三种abi体系结构下的so库。
+        }
+        externalNativeBuild {
+            cmake {
+                cppFlags ''
+            }
+        }
     }
 
     compileOptions {
@@ -87,7 +96,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
+    externalNativeBuild {
+        cmake {
+            path file('src/main/cpp/CMakeLists.txt')
+            version '3.18.1'
+        }
+    }
     lintOptions {
         // Downgrade missing translations to non-fatal severity.
         warning 'MissingTranslation'
