@@ -68,8 +68,8 @@ android {
     def gitDescription = dirtyWorkingCopy ? "${gitHash}-dirty" : gitHash
 
     defaultConfig {
-        minSdkVersion rootProject.minSdkVersion
-        targetSdkVersion rootProject.targetSdkVersion
+        minSdkVersion rootProject.compileSdkVersion
+        targetSdkVersion rootProject.compileSdkVersion
 
         buildConfigField "String", "GIT_DESCRIPTION", "\"${gitDescription}\""
 
